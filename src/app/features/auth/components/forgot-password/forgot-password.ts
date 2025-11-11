@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Auth } from '../../services/auth';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { Authentication } from '../../../../../../projects/auth/src/lib/authentication';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,7 +12,8 @@ import { RouterLink } from "@angular/router";
 export class ForgotPassword {
 
   private _FormBuilder = inject(FormBuilder);
-  private _Auth = inject(Auth);
+  private _Authentication = inject(Authentication);
+  private _Router = inject(Router);
 
   step:number = 1;
 
@@ -26,7 +27,8 @@ export class ForgotPassword {
 
   resetPassword:FormGroup = this._FormBuilder.group({
     email:[null, [Validators.required , Validators.email]],
-    newPassword:[null , [Validators.required , Validators.pattern(/^\w{6,}$/)]],
+    newPassword: [null, [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)]],
+
 
   })
 
@@ -35,7 +37,7 @@ export class ForgotPassword {
       let emailValue = this.verifyEmail.get('email')?.value;
       this.resetPassword.get('email')?.patchValue(emailValue);
 
-      this._Auth.setEmailVerify(this.verifyEmail.value).subscribe({
+      this._Authentication.forgotPassword(this.verifyEmail.value).subscribe({
         next:(res)=>{
           console.log(res)
           if(res.message == "success"){
@@ -49,7 +51,7 @@ export class ForgotPassword {
     }
 
      verifyCodeSubmit():void{
-      this._Auth.setCodeVerify(this.verifyCode.value).subscribe({
+      this._Authentication.verifyResetcode(this.verifyCode.value).subscribe({
         next:(res)=>{
           console.log(res)
           if(res.status == "Success"){
@@ -64,14 +66,14 @@ export class ForgotPassword {
 
 
      resetPasswordSubmit():void{
-      this._Auth.setResetPass(this.resetPassword.value).subscribe({
+      this._Authentication.resetPassword(this.resetPassword.value).subscribe({
         next:(res)=>{
           console.log(res);
 
           if(res.message === "success"){
           localStorage.setItem('userToken' , res.token);
-          this._Auth.saveUserData();
-          // this._Router.navigate(['/home'])
+          this._Authentication.saveUserData();
+          this._Router.navigate(['/blank'])
 
           }
 

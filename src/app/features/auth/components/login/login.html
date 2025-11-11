@@ -1,7 +1,7 @@
 <section class=" shadow p-2 my-2 rounded-4">
   <h2 class="my-3">Create Account</h2>
 
-  <form [formGroup]="loginForm" >
+  <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" >
 
 
 
@@ -51,7 +51,9 @@
   </a>
 </div>
 
-   <button type="submit" class="btn btn-primary w-100 my-3">Login</button>
+   <button type="submit" class="btn btn-primary w-100 my-3">Login
+     
+   </button>
 
   <p class="text-secondary text-center">Do you have an account?
           <a class="text-decoration-none" routerLink="/register" >creat yours</a>
