@@ -1,0 +1,108 @@
+<section class="shadow p-2 my-2 rounded-4">
+  <h2 class="my-3">Create Account</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
+
+    <!-- First & Last Name -->
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="my-2">
+        <label for="firstName">First Name</label>
+        <input id="firstName" type="text" class="form-control"
+               formControlName="firstName"
+               [ngClass]="{
+                 'is-valid': !registerForm.get('firstName')?.errors && (registerForm.get('firstName')?.touched || registerForm.get('firstName')?.dirty),
+                 'is-invalid': registerForm.get('firstName')?.errors && (registerForm.get('firstName')?.touched || registerForm.get('firstName')?.dirty)
+               }">
+        <app-input-error [control]="registerForm.get('firstName')" label="First Name"></app-input-error>
+      </div>
+
+      <div class="my-2">
+        <label for="lastName">Last Name</label>
+        <input id="lastName" type="text" class="form-control"
+               formControlName="lastName"
+               [ngClass]="{
+                 'is-valid': !registerForm.get('lastName')?.errors && (registerForm.get('lastName')?.touched || registerForm.get('lastName')?.dirty),
+                 'is-invalid': registerForm.get('lastName')?.errors && (registerForm.get('lastName')?.touched || registerForm.get('lastName')?.dirty)
+               }">
+        <app-input-error [control]="registerForm.get('lastName')" label="Last Name"></app-input-error>
+      </div>
+    </div>
+
+    <!-- Username -->
+    <div class="my-2">
+      <label for="username">Username</label>
+      <input id="username" type="text" class="form-control" formControlName="username"
+             [ngClass]="{
+               'is-valid': !registerForm.get('username')?.errors && (registerForm.get('username')?.touched || registerForm.get('username')?.dirty),
+               'is-invalid': registerForm.get('username')?.errors && (registerForm.get('username')?.touched || registerForm.get('username')?.dirty)
+             }">
+      <app-input-error [control]="registerForm.get('username')" label="Username"></app-input-error>
+    </div>
+
+    <!-- Email -->
+    <div class="my-2">
+      <label for="email">Email</label>
+      <input id="email" type="email" class="form-control" formControlName="email"
+             [ngClass]="{
+               'is-valid': !registerForm.get('email')?.errors && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty),
+               'is-invalid': registerForm.get('email')?.errors && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)
+             }">
+      <app-input-error [control]="registerForm.get('email')" label="Email"></app-input-error>
+    </div>
+
+  <!-- Phone -->
+<div class="my-2">
+  <label for="phone">Phone</label>
+  <div class="d-flex">
+    <!-- Country select بدون formControlName -->
+    <select aria-label="Country" class="form-select me-2" style="width: 100px;">
+      <option value="+20">EG</option>
+      <option value="+1">US</option>
+      <option value="+44">UK</option>
+    </select>
+
+    <!-- Phone input -->
+    <input id="phone" type="tel" class="form-control flex-grow-1" formControlName="phone"
+           [ngClass]="{
+             'is-valid': !registerForm.get('phone')?.errors && (registerForm.get('phone')?.touched || registerForm.get('phone')?.dirty),
+             'is-invalid': registerForm.get('phone')?.errors && (registerForm.get('phone')?.touched || registerForm.get('phone')?.dirty)
+           }">
+  </div>
+  <app-input-error [control]="registerForm.get('phone')" label="Phone"></app-input-error>
+</div>
+
+
+
+    <!-- Password -->
+    <div class="my-2">
+      <label for="password">Password</label>
+      <input id="password" type="password" class="form-control" formControlName="password"
+             [ngClass]="{
+               'is-valid': !registerForm.get('password')?.errors && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty),
+               'is-invalid': registerForm.get('password')?.errors && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)
+             }">
+      <app-input-error [control]="registerForm.get('password')" label="Password"></app-input-error>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="my-2">
+      <label for="rePassword">Confirm Password</label>
+      <input id="rePassword" type="password" class="form-control" formControlName="rePassword"
+             [ngClass]="{
+               'is-valid': !registerForm.getError('mismatch') && (registerForm.get('rePassword')?.touched || registerForm.get('rePassword')?.dirty),
+               'is-invalid': registerForm.getError('mismatch') && (registerForm.get('rePassword')?.touched || registerForm.get('rePassword')?.dirty)
+             }">
+      <app-input-error [control]="registerForm.get('rePassword')" label="Confirm Password"></app-input-error>
+    </div>
+
+    <!-- Submit Button -->
+    <app-form-button label="Create Account" [disabled]="registerForm.invalid"></app-form-button>
+
+    <!-- Login link -->
+    <p class="text-secondary text-center">
+      Already have an account?
+      <a class="text-decoration-none" routerLink="/login">Login</a>
+    </p>
+
+  </form>
+</section>
