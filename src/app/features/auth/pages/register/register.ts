@@ -3,10 +3,12 @@ import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from "@angular/router";
 import { Authentication } from '../../../../../../projects/auth/src/lib/authentication';
+import { FormButtonComponent } from '../../components/form-button/form-button';
+import { InputErrorComponent } from '../../components/input-error/input-error';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, NgClass, RouterLink],
+  imports: [ReactiveFormsModule, NgClass, RouterLink, FormButtonComponent, InputErrorComponent],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -23,7 +25,7 @@ export class Register {
       email:[null , [Validators.required , Validators.email]],
       password: [null, [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)]],
       rePassword:[null , ],
-      phone:[null , [Validators.required , Validators.pattern(/^01[0125][0-9]{8}$/)]]
+      phone: [null, [ Validators.required, Validators.pattern(/^\d+$/),Validators.maxLength(11)]],
     } , {validators:this.confirmPassword})
 
 
@@ -44,7 +46,7 @@ export class Register {
 
               setTimeout(() => {
                 this._Router.navigate(['/login'])
-              }, 3000);
+              }, 2000);
 
             }
 

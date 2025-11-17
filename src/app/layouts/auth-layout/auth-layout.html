@@ -1,1 +1,37 @@
-<router-outlet></router-outlet>
+<div class="container-fluid min-vh-100 d-flex  align-items-center">
+  <div class="row w-100 justify-content-around align-items-center g-4">
+
+    <!-- العمود اليسار: Description -->
+    <div class="col-lg-5 col-md-6 col-12 p-4 rounded ">
+      <h3 class="text-primary mb-5">
+        <i class="fa-solid fa-pen-to-square me-2"></i> EXAM APP
+      </h3>
+      <h3 class=" fs-5 fs-md-3">
+        Empower your learning journey with our smart exam platform.
+      </h3>
+
+      <div class="mt-5 d-flex flex-column gap-5">
+        <div>
+          <h5 class="text-primary"><i class="fa-solid fa-brain me-2"></i>Tailored Diplomas</h5>
+          <p class="text-secondary">Choose from specialized tracks like Frontend, Backend, and Mobile Development.</p>
+        </div>
+
+        <div>
+          <h5 class="text-primary"><i class="fa-solid fa-book-open me-2"></i>Comprehensive Courses</h5>
+          <p class="text-secondary">Structured modules to enhance your coding skills step by step.</p>
+        </div>
+
+        <div>
+          <h5 class="text-primary"><i class="fa-solid fa-file-signature me-2"></i>Smart Multi-Step Forms</h5>
+          <p class="text-secondary">Guided forms for exams and account management.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- العمود اليمين: Forms -->
+    <div class="col-lg-5 col-md-6 col-12 p-4 rounded ">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>
